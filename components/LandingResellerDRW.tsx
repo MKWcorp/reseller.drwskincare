@@ -435,6 +435,36 @@ export default function LandingResellerDRW() {
         </div>
       </section>
 
+      {/* VIDEO PELUANG BISNIS */}
+      <section className="mx-auto max-w-6xl px-4 pb-14">
+        <div className="relative rounded-3xl overflow-hidden shadow-lg bg-black">
+          <video
+            id="benefit-vid"
+            src="/benefit-video.mp4"
+            autoPlay
+            loop
+            playsInline
+            muted
+            className="w-full object-cover"
+          />
+          {/* Tombol unmute / mute */}
+          <button
+            onClick={() => {
+              const v = document.getElementById('benefit-vid') as HTMLVideoElement | null;
+              if (v) { v.muted = !v.muted; }
+            }}
+            id="benefit-mute-btn"
+            className="absolute bottom-4 right-4 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
+            aria-label="Toggle suara"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+          </button>
+        </div>
+      </section>
+
       {/* SHOWCASE */}
       <section id="showcase" className="mx-auto max-w-6xl px-4 py-14">
         <div className="flex items-end justify-between">
