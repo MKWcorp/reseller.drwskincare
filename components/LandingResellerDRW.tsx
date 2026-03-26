@@ -316,7 +316,7 @@ export default function LandingResellerDRW() {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative flex justify-center">
             {/* Video hero – autoplay muted, tombol unmute di pojok */}
             <video
               ref={videoRef}
@@ -325,7 +325,7 @@ export default function LandingResellerDRW() {
               loop
               playsInline
               muted
-              className="aspect-[9/16] w-full rounded-3xl object-contain shadow-inner bg-black"
+              className="h-[420px] md:h-[480px] w-auto rounded-3xl object-cover shadow-inner bg-black"
             />
             {/* Tombol unmute / mute */}
             <button
