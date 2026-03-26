@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   ShieldCheckIcon,
   BeakerIcon,
@@ -41,6 +41,15 @@ export default function LandingResellerDRW() {
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  };
 
   // TikTok & Meta Pixel page tracking
   useEffect(() => {
@@ -308,14 +317,34 @@ export default function LandingResellerDRW() {
             </div>
           </div>
           <div className="relative">
-            {/* Video hero – autoplay, loop, bersuara, tanpa kontrol */}
+            {/* Video hero – autoplay muted, tombol unmute di pojok */}
             <video
+              ref={videoRef}
               src="/hero-video.mp4"
               autoPlay
               loop
               playsInline
+              muted
               className="aspect-[9/16] w-full rounded-3xl object-contain shadow-inner bg-black"
             />
+            {/* Tombol unmute / mute */}
+            <button
+              onClick={toggleMute}
+              className="absolute bottom-4 right-4 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
+              aria-label={isMuted ? 'Aktifkan suara' : 'Matikan suara'}
+            >
+              {isMuted ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-6.364-2.636a9 9 0 010-12.728" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
       </section>
