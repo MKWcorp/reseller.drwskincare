@@ -308,10 +308,12 @@ export default function LandingResellerDRW() {
             </div>
           </div>
           <div className="relative">
-            {/* PLACEHOLDER: Ganti gambar hero */}
-            <img
-              src="/images/hero.webp"
-              alt="DRW Skincare Reseller Hero"
+            {/* Video hero – autoplay, loop, bersuara, tanpa kontrol */}
+            <video
+              src="/hero-video.mp4"
+              autoPlay
+              loop
+              playsInline
               className="aspect-[4/3] w-full rounded-3xl object-cover shadow-inner"
             />
           </div>
