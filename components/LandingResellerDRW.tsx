@@ -60,6 +60,48 @@ export default function LandingResellerDRW() {
     }
   };
 
+  // Intersection Observer: auto-mute video yang tidak terlihat di layar
+  // Ketika video 1 terlihat → mute video 2, dan sebaliknya
+  useEffect(() => {
+    const v1 = videoRef.current;
+    const v2 = benefitVideoRef.current;
+    if (!v1 || !v2) return;
+
+    const observer1 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Video 1 masuk layar: mute video 2 jika video 1 tidak muted
+          if (!v1.muted) {
+            v2.muted = true;
+            setIsBenefitMuted(true);
+          }
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    const observer2 = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Video 2 masuk layar: mute video 1 jika video 2 tidak muted
+          if (!v2.muted) {
+            v1.muted = true;
+            setIsMuted(true);
+          }
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer1.observe(v1);
+    observer2.observe(v2);
+
+    return () => {
+      observer1.disconnect();
+      observer2.disconnect();
+    };
+  }, []);
+
   // TikTok & Meta Pixel page tracking
   useEffect(() => {
     if (typeof window !== "undefined" && window.ttq) {
