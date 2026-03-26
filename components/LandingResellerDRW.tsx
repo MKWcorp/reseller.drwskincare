@@ -42,12 +42,21 @@ export default function LandingResellerDRW() {
   const [error, setError] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isBenefitMuted, setIsBenefitMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const benefitVideoRef = useRef<HTMLVideoElement>(null);
 
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
+    }
+  };
+
+  const toggleBenefitMute = () => {
+    if (benefitVideoRef.current) {
+      benefitVideoRef.current.muted = !benefitVideoRef.current.muted;
+      setIsBenefitMuted(benefitVideoRef.current.muted);
     }
   };
 
@@ -439,7 +448,7 @@ export default function LandingResellerDRW() {
       <section className="mx-auto max-w-6xl px-4 pb-14">
         <div className="relative rounded-3xl overflow-hidden shadow-lg bg-black">
           <video
-            id="benefit-vid"
+            ref={benefitVideoRef}
             src="/benefit-video.mp4"
             autoPlay
             loop
@@ -447,20 +456,23 @@ export default function LandingResellerDRW() {
             muted
             className="w-full object-cover"
           />
-          {/* Tombol unmute / mute */}
+          {/* Tombol unmute / mute benefit video */}
           <button
-            onClick={() => {
-              const v = document.getElementById('benefit-vid') as HTMLVideoElement | null;
-              if (v) { v.muted = !v.muted; }
-            }}
-            id="benefit-mute-btn"
+            onClick={toggleBenefitMute}
             className="absolute bottom-4 right-4 bg-black/60 hover:bg-black/80 text-white rounded-full p-2 transition-all"
-            aria-label="Toggle suara"
+            aria-label={isBenefitMuted ? 'Aktifkan suara' : 'Matikan suara'}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
-            </svg>
+            {isBenefitMuted ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M12 6v12m-6.364-2.636a9 9 0 010-12.728" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707A1 1 0 0112 5v14a1 1 0 01-1.707.707L5.586 15z" />
+              </svg>
+            )}
           </button>
         </div>
       </section>
