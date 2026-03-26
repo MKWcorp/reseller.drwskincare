@@ -314,7 +314,7 @@ export default function LandingResellerDRW() {
               autoPlay
               loop
               playsInline
-              className="aspect-[4/3] w-full rounded-3xl object-cover shadow-inner"
+              className="aspect-[9/16] w-full rounded-3xl object-contain shadow-inner bg-black"
             />
           </div>
         </div>
