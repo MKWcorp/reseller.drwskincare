@@ -37,7 +37,7 @@ export default function LandingResellerDRW() {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [phone, setPhone] = useState("");
-  const [packageTier, setPackageTier] = useState("STARTER");
+  const [packageTier, setPackageTier] = useState("Mulai 1 Juta");
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -780,8 +780,11 @@ export default function LandingResellerDRW() {
                   onChange={(e) => setPackageTier(e.target.value)}
                   className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:ring-2 focus:ring-rose-200"
                 >
-                  <option>STARTER</option>
-                  <option>PREMIUM</option>
+                  <option>Mulai 1 Juta</option>
+                  <option>Mulai 2 Juta</option>
+                  <option>Mulai 3 Juta</option>
+                  <option>Mulai 5 Juta</option>
+                  <option>Mulai 10 Juta</option>
                 </select>
               </div>
               <div className="flex items-start gap-3 text-sm">
