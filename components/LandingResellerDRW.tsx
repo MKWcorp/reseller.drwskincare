@@ -12,6 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { trackLead, trackContact, trackInitiateCheckout } from "@/lib/meta-pixel";
 
 // TikTok & Meta Pixel Analytics type declarations
 declare global {
@@ -191,17 +192,11 @@ export default function LandingResellerDRW() {
       });
     }
 
-    // Meta Pixel Event: Lead Generated
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Lead", {
-        content_name: "Reseller Form Submission",
-        content_category: "DRW Skincare Reseller",
-      });
-      window.fbq("track", "Schedule", {
-        content_name: "Free Consultation Booking",
-        content_category: "Reseller Consultation",
-      });
-    }
+    // Meta Pixel Event: Lead Generated (dengan CAPI server-side tracking)
+    trackLead({
+      content_name: "Reseller Form Submission",
+      content_category: "DRW Skincare Reseller",
+    });
 
     const to = normalizePhone(
       process.env.NEXT_PUBLIC_WA_NUMBER || "62811944288"
@@ -242,12 +237,11 @@ export default function LandingResellerDRW() {
         content_category: "User Engagement",
       });
     }
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "InitiateCheckout", {
-        content_name: "Reseller Form View",
-        content_category: "User Engagement",
-      });
-    }
+    // Meta Pixel tracking dengan CAPI
+    trackInitiateCheckout({
+      value: 0,
+      currency: "IDR",
+    });
     document
       .getElementById("lead-form")
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -260,12 +254,11 @@ export default function LandingResellerDRW() {
         content_category: "Direct Contact",
       });
     }
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Contact", {
-        content_name: "WhatsApp Direct Contact",
-        content_category: "Customer Contact",
-      });
-    }
+    // Meta Pixel tracking dengan CAPI
+    trackContact({
+      content_name: "WhatsApp Direct Contact",
+      content_category: "Customer Contact",
+    });
     const waNumber = normalizePhone(
       process.env.NEXT_PUBLIC_WA_NUMBER || "62811944288"
     );
