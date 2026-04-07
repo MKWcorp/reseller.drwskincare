@@ -27,13 +27,12 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-// Meta Pixel ID: 1077062414508009
-fbq('init', '1077062414508009');
+fbq('init', '1748883439424330');
 fbq('track', 'PageView');
 `;
 
 const META_PIXEL_NOSCRIPT = `
-  <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1077062414508009&ev=PageView&noscript=1" />
+  <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1748883439424330&ev=PageView&noscript=1" />
 `;
 
 const TIKTOK_PIXEL_CODE = `
